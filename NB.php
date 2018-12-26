@@ -20,12 +20,10 @@ for ($i=1;$i<=5;$i++){
 				(($jumlah[$i]['Total'])/($jumlah['Total'])));
 	array_push($prob[$i] = $hitung);
 }
-$MAX = max($prob);
-$key = array_search ($MAX, $prob);
-
-echo '<br> Probabilitas ';
-echo $MAX;
-echo '<br> Prioritas ';
-echo $key;
+$max = max($prob);
+$class = array_search ($max, $prob);
+array_push($prob['max']= $max);
+array_push($prob['class']= $class);
+return $prob;
 }
 ?>
