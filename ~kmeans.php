@@ -1,5 +1,6 @@
 <?php
-//error_reporting(0);
+ini_set('max_execution_time', 0); // for infinite time of execution 
+$time_start = microtime(true);  //Start Timer
 require_once ("koneksi.php");
 
 //Centroid Awal
@@ -42,13 +43,17 @@ require_once ("koneksi.php");
 			'T'=> 1,
 		),
     );
+//Inisiasi Var Centroid Baru	
+$CentroidB = $Centroid;
+	
+//Start Iteration	
+$iter = 1;
+while ($iter > 0){
 	mysqli_query($con ,"TRUNCATE `kmeans_c1`");
 	mysqli_query($con ,"TRUNCATE `kmeans_c2`");
 	mysqli_query($con ,"TRUNCATE `kmeans_c3`");
 	mysqli_query($con ,"TRUNCATE `kmeans_c4`");
 	mysqli_query($con ,"TRUNCATE `kmeans_c5`");
-
-$CentroidB = $Centroid;
 
 for ($i=1;$i<=5;$i++){
 $CentroidB['C'.$i] = array_fill_keys(array('TP','KM','M','PR','T','Total'),0);
@@ -86,17 +91,20 @@ for ($i=1;$i<=5;$i++){
 	$CentroidB['C'.$i]['PR'] = $CentroidB['C'.$i]['PR']/$CentroidB['C'.$i]['Total'];
 	$CentroidB['C'.$i]['T'] = $CentroidB['C'.$i]['T']/$CentroidB['C'.$i]['Total'];
 }
-			
-echo '<pre>';
-print_r($CentroidB);
-echo '</pre>';
-
 if ($CentroidB != $Centroid){
 	$Centroid = $CentroidB;
+	$iter++;
+	//REPEAT
+}else{
+	$enditer = $iter;
+	$iter = 0;
 }
+}
+echo 'ITERASI KE - '.$enditer.'<br>';
+//End Iteration
 
-echo '<pre>';
-print_r($Centroid);
-echo '</pre>';
-
+$time_end = microtime(true); //End Timer
+//Calculate and Print Timer
+$execution_time = ($time_end - $time_start);
+echo '<b>Total Execution Time:</b> '.$execution_time.' Seconds';
 ?>

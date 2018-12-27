@@ -1,12 +1,15 @@
 <?php
+ini_set('max_execution_time', 0); // for infinite time of execution 
+$time_start = microtime(true);  //Start Timer
 require_once ("koneksi.php");
 require_once ("prep.php");
 require_once ("count.php");
 require_once ("NB.php");
-echo "DATA MINING";
+echo "<H2>[Perbandingan / Integrasi] Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010</H2>";
 ?>
 <!--DATA TRAINING PREPARATION-->
 <form method="post" action=''>
+<button name="" type="submit">Data Preprocessing</button><br><br>
 <table>
 <thead>
 <tr>
@@ -41,7 +44,7 @@ if(isset($_POST['show'])){
 <H2>DATA TRAINING</H2>
 <table cellpadding="0" cellspacing="0" border="1px" class="table">
 <thead>
-<tr>
+<tr bgcolor="black" style="color: white;">
 <th>No.</th>
 <th>Data Nomor</th>
 <th>Total Pengungsi</th>
@@ -61,24 +64,29 @@ for ($i=1;$i<=5;$i++){
 		$j++;
 ?>
 	<tr>
-	<td> <?php echo $j; ?></td>
-	<td> <?php echo $hasil['Data']; ?></td>
-	<td> <?php echo $hasil['Total_Pengungsi'];?></td>
-	<td> <?php echo $hasil['Kebutuhan_Mendesak'];?></td>
-	<td> <?php echo $hasil['Medis'];?></td>
-	<td> <?php echo $hasil['Psikolog_Rohani'];?></td>
-	<td> <?php echo $hasil['Teknis'];?></td>
-	<td> <?php echo "C".$i."";?></td>
+	<td><?php echo $j; ?></td>
+	<td><?php echo $hasil['Data']; ?></td>
+	<td><?php echo $hasil['Total_Pengungsi'];?></td>
+	<td><?php echo $hasil['Kebutuhan_Mendesak'];?></td>
+	<td><?php echo $hasil['Medis'];?></td>
+	<td><?php echo $hasil['Psikolog_Rohani'];?></td>
+	<td><?php echo $hasil['Teknis'];?></td>
+	<td><?php echo "C".$i."";?></td>
 	</tr>
 	
 <?php
 	}
+?>
+	<tr bgcolor="#000000">
+	<td colspan="8" >Black</td>
+	</tr>
+<?php
 }
 ?>
 	</tbody>
 	</table>
 <?php
-}
+}else 
 if(isset($_POST['nb'])){
 	if(isset($_POST['INDT'])){
 		echo "Hasil dengan memasukkan data baru ke dalam data training";
@@ -86,12 +94,13 @@ if(isset($_POST['nb'])){
 		echo "Hasil tanpa memasukkan data baru ke dalam data training";
 	}
 ?>
+<H2>Naive Bayes Classification</H2>
 <table cellpadding="0" cellspacing="0" border="1px" class="table">
 <thead>
 <tr>
-<th><span class="style1">Data</span></th>
-<th><span class="style1">Probabilitas Tertinggi</span></th>
-<th><span class="style1">Kelas</span></th>
+<th>Data</th>
+<th>Probabilitas Tertinggi</th>
+<th>Kelas</th>
 <tr>
 </thead>
 <tbody>
@@ -102,9 +111,9 @@ while ($record = mysqli_fetch_assoc($query)) {
 	$prob = NB($con,$record);
 ?>
 <tr>
-<td> <?php echo $record['Data']; ?></td>
-<td> <?php echo $prob['max'];?></td>
-<td> <?php echo $prob['class'];?></td>
+<td><?php echo $record['Data']; ?></td>
+<td><?php echo $prob['max'];?></td>
+<td><?php echo $prob['class'];?></td>
 </tr>
 <?php 
 	if(isset($_POST['INDT'])){
@@ -114,5 +123,60 @@ while ($record = mysqli_fetch_assoc($query)) {
 </tbody>
 </table>
 <?php
+}else
+{
+?>
+<H2>DATA HASIL PREPROCESSING</H2>
+<table cellpadding="0" cellspacing="0" border="1px" class="table">
+<thead>
+<tr>
+<th>No</th>
+<th>Update Terakhir</th>
+<th>Nama Posko</th>
+<th>Dusun</th>
+<th>Desa</th>
+<th>Kecamatan</th>
+<th>Kabupaten</th>
+<th>Asal Pengungsi</th>
+<th>Total Pengungsi</th>
+<th>Kebutuhan Mendesak</th>
+<th>Relawan Medis</th>
+<th>Relawan Psikolog dan Rohani</th>
+<th>Relawan Teknis</th>
+<th>Prioritas</th>
+<tr>
+</thead>
+<tbody>
+
+<?php
+$query = mysqli_query($con,"SELECT * FROM mentah");
+while ($record = mysqli_fetch_assoc($query)) {
+?>
+<tr>
+<td> <?php echo $record['No']; ?></td>
+<td> <?php echo $record['Update_Terakhir']; ?></td>
+<td> <?php echo $record['Nama_Posko']; ?></td>
+<td> <?php echo $record['Dusun']; ?></td>
+<td> <?php echo $record['Desa']; ?></td>
+<td> <?php echo $record['Kecamatan']; ?></td>
+<td> <?php echo $record['Kabupaten']; ?></td>
+<td> <?php echo $record['Asal_Pengungsi']; ?></td>
+<td> <?php echo $record['Total_Pengungsi']; ?></td>
+<td> <?php echo $record['Kebutuhan_Mendesak']; ?></td>
+<td> <?php echo $record['Medis']; ?></td>
+<td> <?php echo $record['Psikolog_Rohani']; ?></td>
+<td> <?php echo $record['Teknis']; ?></td>
+<td> <?php echo $record['Prioritas']; ?></td>
+</tr>
+<?php 
+} 
+?>
+</tbody>
+</table>
+<?php
 }
+$time_end = microtime(true); //End Timer
+//Calculate and Print Timer
+$execution_time = ($time_end - $time_start);
+echo '<b>Total Execution Time:</b> '.$execution_time.' Seconds';
 ?>
