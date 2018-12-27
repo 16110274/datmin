@@ -3,11 +3,31 @@
 // COUNT DATA IN DATABASE
 function counting($con,$str){  
 $data = array();
+
 $query = mysqli_query($con,"SELECT * FROM naivebayes_c".$str."");
 while ($hasil = mysqli_fetch_assoc($query)) {
 	array_push($data, $hasil);
 }
-$count = array();
+
+$count = array(
+		'<100' =>0,
+		'100-500' =>0,
+		'>500' =>0,
+		'<50' => 0,
+		'50-100' => 0,
+		'>100' => 0,
+		'Medis Tidak Ada' => 0,
+		'Medis Kurang' => 0,
+		'Medis Mencukupi' => 0,
+		'Psikolog dan Rohani Tidak Ada' => 0,
+		'Psikolog dan Rohani Kurang' => 0,
+		'Psikolog dan Rohani Mencukupi' => 0,
+        'Teknis Tidak Ada' => 0,
+		'Teknis Kurang' => 0,
+		'Teknis Mencukupi' => 0,
+		'Total' => 0,
+    );
+//coba diubah jadi multi dimensi untuk setiap atribut supaya bisa lebih rapih untuk tampilan data relawan medis, psikologi & rohani, dan teknis
 foreach($data as $one){
     @$count[$one['Total_Pengungsi']]++;
     @$count[$one['Kebutuhan_Mendesak']]++;
@@ -16,7 +36,7 @@ foreach($data as $one){
     @$count[$one['Teknis']]++;
 	@$hitung++;
 }
-array_push($count["Total"] = $hitung);
+array_push($count,$count["Total"] = $hitung);
 return $count;
 }
 
@@ -33,21 +53,21 @@ function plotting($count){
 			'>100' => $count['>100'],
 		),
 		'M' => array(
-			'M1' => $count['M1'],
-			'M2' => $count['M2'],
-			'M3' => $count['M3'],
+			'Medis Tidak Ada' => $count['Medis Tidak Ada'],
+			'Medis Kurang' => $count['Medis Kurang'],
+			'Medis Mencukupi' => $count['Medis Mencukupi'],
 		
 		),
 		'PR' => array(
-			'PR1' => $count['PR1'],
-			'PR2' => $count['PR2'],
-			'PR3' => $count['PR3'],
+			'Psikolog dan Rohani Tidak Ada' => $count['Psikolog dan Rohani Tidak Ada'],
+			'Psikolog dan Rohani Kurang' => $count['Psikolog dan Rohani Kurang'],
+			'Psikolog dan Rohani Mencukupi' => $count['Psikolog dan Rohani Mencukupi'],
         
 		),
 		'T' => array(
-			'T1' => $count['T1'],
-			'T2' => $count['T2'],
-			'T3' => $count['T3'],
+			'Teknis Tidak Ada' => $count['Teknis Tidak Ada'],
+			'Teknis Kurang' => $count['Teknis Kurang'],
+			'Teknis Mencukupi' => $count['Teknis Mencukupi'],
 		),
 		'Total' => $count['Total'],
     );

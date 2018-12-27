@@ -1,16 +1,16 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 require_once ("koneksi.php");
-require_once ("prep.php");
 require_once ("count.php");
 require_once ("NB.php");
 
-//DATA TRAINING PREPARATION
-//prep($con);
+if(isset($_POST['INDT'])){
+		echo "Hasil dengan memasukkan data baru ke dalam data training";
+	}else{
+		echo "Hasil tanpa memasukkan data baru ke dalam data training";
+	}
 ?>
-
-<table cellpadding="0" cellspacing="0" border="1px"
-class="table">
+<table cellpadding="0" cellspacing="0" border="1px" class="table">
 <thead>
 <tr>
 <th><span class="style1">Data</span></th>
@@ -30,6 +30,10 @@ while ($record = mysqli_fetch_assoc($query)) {
 <td> <?php echo $prob['max'];?></td>
 <td> <?php echo $prob['class'];?></td>
 </tr>
-<?php } ?>
+<?php 
+	if(isset($_POST['INDT'])){
+		INDT($con,$record,$prob);
+	}
+} ?>
 </tbody>
 </table>

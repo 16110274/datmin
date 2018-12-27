@@ -1,7 +1,13 @@
 <?php
-// NOT CONNECTED TO DATABASE
 // DATA TRAINING PREPARATION
-function prep($con){  
+function prep($con){
+	mysqli_query($con ,"TRUNCATE `naivebayes_c1`");
+	mysqli_query($con ,"TRUNCATE `naivebayes_c2`");
+	mysqli_query($con ,"TRUNCATE `naivebayes_c3`");
+	mysqli_query($con ,"TRUNCATE `naivebayes_c4`");
+	mysqli_query($con ,"TRUNCATE `naivebayes_c5`");
+	mysqli_query($con ,"TRUNCATE `naivebayes_sisa`");
+	
 	$query = mysqli_query($con,"SELECT * FROM mentah");
 	while ($record = mysqli_fetch_array($query)) {
 
@@ -21,29 +27,29 @@ function prep($con){
 	}else{
 		$record['Kebutuhan_Mendesak'] = "50-100";
 	}
-//Pengelompokkan data kebutuhan mendesak
+//Pengelompokkan data Relawan Medis
 	if($record['Medis']==1){
-		$record['Medis'] = "M1";
+		$record['Medis'] = "Medis Tidak Ada";
 	}else if ($record['Medis']==2){
-		$record['Medis'] = "M2";
+		$record['Medis'] = "Medis Kurang";
 	}else if ($record['Medis']==3){
-		$record['Medis'] = "M3";
+		$record['Medis'] = "Medis Mencukupi";
 	}
-//Pengelompokkan data kebutuhan mendesak
+//Pengelompokkan data Relawan Psikolog & Rohani
 	if($record['Psikolog_Rohani']==1){
-		$record['Psikolog_Rohani'] = "PR1";
+		$record['Psikolog_Rohani'] = "Psikolog dan Rohani Tidak Ada";
 	}else if ($record['Psikolog_Rohani']==2){
-		$record['Psikolog_Rohani'] = "PR2";
+		$record['Psikolog_Rohani'] = "Psikolog dan Rohani Kurang";
 	}elseif ($record['Psikolog_Rohani']==3){
-		$record['Psikolog_Rohani'] = "PR3";
+		$record['Psikolog_Rohani'] = "Psikolog dan Rohani Mencukupi";
 	}
-//Pengelompokkan data kebutuhan mendesak
+//Pengelompokkan data Relawan Teknis
 	if($record['Teknis']==1){
-		$record['Teknis'] = "T1";
+		$record['Teknis'] = "Teknis Tidak Ada";
 	}else if ($record['Teknis']==2){
-		$record['Teknis'] = "T2";
+		$record['Teknis'] = "Teknis Kurang";
 	}else if ($record['Teknis']==3){
-		$record['Teknis'] = "T3";
+		$record['Teknis'] = "Teknis Mencukupi";
 	}	
 	
     if (strlen($record['Prioritas']) == 1){
@@ -66,13 +72,11 @@ function prep($con){
 			default:
 				break;
 		}
-		$querys="INSERT INTO `naivebayes_c".$var."` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
-				 VALUES ('".$record['No']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis'].	"')";
-		$hasil=mysqli_query($con,$querys);
+		mysqli_query($con,"INSERT INTO `naivebayes_c".$var."` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
+						   VALUES ('".$record['No']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis']."')");
 	} else {
-		$querys="INSERT INTO `naivebayes_sisa` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
-				VALUES ('".$record['No']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis'].	"')";
-		$hasil=mysqli_query($con,$querys);
+		mysqli_query($con,"INSERT INTO `naivebayes_sisa` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
+						   VALUES ('".$record['No']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis']."')");
 	}
 }
 }

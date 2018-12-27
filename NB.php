@@ -5,9 +5,9 @@ $total = 0;
 for ($i=1;$i<=5;$i++){
 	$count = counting($con,$i);
 	$plot = plotting($count);
-	array_push($jumlah[$i]= $plot);
+	array_push($jumlah,$jumlah[$i]= $plot);
 	$total = $total + $jumlah[$i]['Total'];
-	array_push($jumlah['Total']= $total);
+	array_push($jumlah,$jumlah['Total']= $total);
 }
 
 $prob = array();
@@ -18,12 +18,19 @@ for ($i=1;$i<=5;$i++){
 				(($jumlah[$i]['PR'][$record['Psikolog_Rohani']])/($jumlah[$i]['Total']))*
 				(($jumlah[$i]['T'][$record['Teknis']])/($jumlah[$i]['Total']))*
 				(($jumlah[$i]['Total'])/($jumlah['Total'])));
-	array_push($prob[$i] = $hitung);
+	array_push($prob,$prob[$i] = $hitung);
 }
 $max = max($prob);
 $class = array_search ($max, $prob);
-array_push($prob['max']= $max);
-array_push($prob['class']= $class);
+array_push($prob,$prob['max']= $max);
+array_push($prob,$prob['class']= $class);
 return $prob;
+}
+
+function INDT($con,$record,$prob){
+	mysqli_query($con,"INSERT INTO `naivebayes_c".$prob['class']."` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
+				  VALUES ('".$record['Data']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis']."')");
+				  
+	mysqli_query($con,"DELETE FROM `naivebayes_sisa` WHERE `naivebayes_sisa`.`Data` = ".$record['Data']."");
 }
 ?>
