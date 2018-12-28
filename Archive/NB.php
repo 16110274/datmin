@@ -13,11 +13,11 @@ for ($i=1;$i<=5;$i++){
 $prob = array();
 for ($i=1;$i<=5;$i++){
 	$hitung = ((($jumlah[$i]['TP'][$record['Total_Pengungsi']])/($jumlah[$i]['Total']))*
-				(($jumlah[$i]['KM'][$record['Kebutuhan_Mendesak']])/($jumlah[$i]['Total']))*
-				(($jumlah[$i]['M'][$record['Medis']])/($jumlah[$i]['Total']))*
-				(($jumlah[$i]['PR'][$record['Psikolog_Rohani']])/($jumlah[$i]['Total']))*
-				(($jumlah[$i]['T'][$record['Teknis']])/($jumlah[$i]['Total']))*
-				(($jumlah[$i]['Total'])/($jumlah['Total'])));
+			   (($jumlah[$i]['KM'][$record['Kebutuhan_Mendesak']])/($jumlah[$i]['Total']))*
+			   (($jumlah[$i]['M'][$record['Medis']])/($jumlah[$i]['Total']))*
+			   (($jumlah[$i]['PR'][$record['Psikolog_Rohani']])/($jumlah[$i]['Total']))*
+			   (($jumlah[$i]['T'][$record['Teknis']])/($jumlah[$i]['Total']))*
+			   (($jumlah[$i]['Total'])/($jumlah['Total'])));
 	array_push($prob,$prob[$i] = $hitung);
 }
 $max = max($prob);
