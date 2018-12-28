@@ -67,7 +67,7 @@
 		showNB($con);
 	}else if(isset($_POST['km'])){
 		//if button kmeans is pressed
-		if(isset($_POST['ins'])){
+		if(isset($_POST['nbtkm'])){
 			//if process with kmeans is checked
 			kmeans($con,'kmeans_training_naivebayes');
 			prep($con,'union_kmeans');
