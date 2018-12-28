@@ -1,7 +1,7 @@
 <?php
-function showdata($algo, $title){
+function showdata($con,$algo,$title){
 ?>
-	<H2><?php $title?></H2>
+	<H2><?php echo$title?></H2>
 	<table cellpadding="0" cellspacing="0" border="1px" class="table">
 		<thead>
 		<tr bgcolor="black" style="color: white;">
@@ -47,12 +47,12 @@ function showdata($algo, $title){
 <?php
 }
 
-function showprepro(){
+function showprepro($con){
 ?>
 	<H2>DATA HASIL PREPROCESSING</H2>
 	<table cellpadding="0" cellspacing="0" border="1px" class="table">
 		<thead>
-		<tr>
+		<tr bgcolor="black" style="color: white;">
 			<th>No.</th>
 			<th>Data No</th>
 			<th>Update Terakhir</th>

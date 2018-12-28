@@ -2,45 +2,45 @@
 //KMEANS CALCULATION
 function kmeans($con){
 //Centroid Awal
-	$Centroid = array(
-		'C1' => array(
+	$Centroid = [
+		'C1' => [
 			'TP'=> 900,
 			'KM'=> 177,
 			'M'=> 1,
 			'PR'=> 1,
 			'T'=> 1,
-		),
-		'C2' => array(
+		],
+		'C2' => [
 			'TP'=> 545,
 			'KM'=> 66,
 			'M'=> 1,
 			'PR'=> 3,
 			'T'=> 1,
-		),
-		'C3' => array(
+		],
+		'C3' => [
 			'TP'=> 648,
 			'KM'=> 53,
 			'M'=> 1,
 			'PR'=> 3,
 			'T'=> 3,
 		
-		),
-		'C4' => array(
+		],
+		'C4' => [
 			'TP'=> 10,
 			'KM'=> 7,
 			'M'=> 1,
 			'PR'=> 2,
 			'T'=> 3,
         
-		),
-		'C5' => array(
+		],
+		'C5' => [
 			'TP'=> 806,
 			'KM'=> 61,
 			'M'=> 3,
 			'PR'=> 1,
 			'T'=> 1,
-		),
-    );
+		],
+    ];
 //Inisiasi Var Centroid Baru	
 $CentroidB = $Centroid;
 	
@@ -58,7 +58,7 @@ while ($iter > 0){
 	for ($i=1;$i<=5;$i++){
 		$CentroidB['C'.$i] = array_fill_keys(array('TP','KM','M','PR','T','Total'),0);
 	}
-	$jarak = array[];
+	$jarak = [];
 	
 	//Fetch data from source table
 	$query = mysqli_query($con,"SELECT * FROM mentah");

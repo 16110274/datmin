@@ -48,20 +48,30 @@
 		if(isset($_POST['prep'])){
 			//if prepare data training is checked
 			//function preparation is called
+			prep($con);
 		}
 		//function show data is called
+		showdata($con,'naivebayes','Naive Bayes Data Training');
 	}else if(isset($_POST['nb'])){
 		//if button naive bayes is pressed
 		if(isset($_POST['ins'])){
 			//if insert in data training is checked
 			//function insert to data training is called after every row is calculated
-		}
+			//INDT($con,$record,$prob);
+			echo "Hasil dengan memasukkan data baru ke dalam data training";
+		}else{
+			echo "Hasil tanpa memasukkan data baru ke dalam data training";
+		}	
 		//function naive bayes is called
+		showNB($con);
 	}else if(isset($_POST['km'])){
 		//if button kmeans is pressed
 		//function kmeans is called
+		kmeans($con);
+		showdata($con,'kmeans','K-Means Clustering');
 	}else {
 		//default view
+		showprepro($con);
 	}
 ?>
 

@@ -93,12 +93,10 @@ function naivebayes($con,$record){
 	$jumlah = array();
 	$total = 0;
 	
-	for ($i=1;$i<=5;$i++){
-		$count = counting($con,$i);
-				
+	for ($i=1;$i<=5;$i++){				
 		$data = array();
 
-	$query = mysqli_query($con,"SELECT * FROM naivebayes_c".$str."");
+	$query = mysqli_query($con,"SELECT * FROM naivebayes_c".$i."");
 	while ($hasil = mysqli_fetch_assoc($query)) {
 	array_push($data, $hasil);
 	}
@@ -187,10 +185,59 @@ function naivebayes($con,$record){
 }
 
 //INSERT TO DATA TRAINING
-function INDT($con,$record,$prob){
+function insertDT($con,$record,$prob){
 	mysqli_query($con,"INSERT INTO `naivebayes_c".$prob['class']."` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`) 
 				  VALUES ('".$record['Data']."', '".$record['Total_Pengungsi']."', '".$record['Kebutuhan_Mendesak']."', '".$record['Medis']."', '".$record['Psikolog_Rohani']."', '".$record['Teknis']."')");
 				  
 	mysqli_query($con,"DELETE FROM `naivebayes_sisa` WHERE `naivebayes_sisa`.`Data` = ".$record['Data']."");
 }
+
+//SHOW NAIVE BAYES
+function showNB($con){
+?>
+<H2>Naive Bayes Classification</H2>
+<table cellpadding="0" cellspacing="0" border="1px" class="table">
+<thead>
+<tr bgcolor="black" style="color: white;">
+<th>No.</th>
+<th>Data Nomor</th>
+<th>Total Pengungsi</th>
+<th>Kebutuhan Mendesak</th>
+<th>Relawan Medis</th>
+<th>Relawan Psikolog / Rohani</th>
+<th>Relawan Teknis</th>
+<th>Probabilitas Tertinggi</th>
+<th>Kelas</th>
+<tr>
+</thead>
+<tbody>
+
+<?php
+$j=0;
+$query = mysqli_query($con,"SELECT * FROM naivebayes_sisa");
+while ($hasil = mysqli_fetch_assoc($query)) {
+	$prob = naivebayes($con,$hasil);
+	$j++;
+?>
+<tr>
+<td><?php echo $j; ?></td>
+<td><?php echo $hasil['Data']; ?></td>
+<td><?php echo $hasil['Total_Pengungsi'];?></td>
+<td><?php echo $hasil['Kebutuhan_Mendesak'];?></td>
+<td><?php echo $hasil['Medis'];?></td>
+<td><?php echo $hasil['Psikolog_Rohani'];?></td>
+<td><?php echo $hasil['Teknis'];?></td>
+<td><?php echo number_format((float)$prob['max'], 10, '.', '');?></td>
+<td><?php echo $prob['class'];?></td>
+</tr>
+<?php 
+	if(isset($_POST['ins'])){
+		insertDT($con,$hasil,$prob);
+	}
+} ?>
+</tbody>
+</table>
+<?php
+}
+//Next Function if needed
 ?>
