@@ -61,7 +61,7 @@ $j=0;
 for ($i=1;$i<=5;$i++){
 	$query = mysqli_query($con,"SELECT * FROM naivebayes_c".$i."");
 	while ($hasil = mysqli_fetch_assoc($query)) {
-		$j++;
+	$j++;
 ?>
 	<tr>
 	<td><?php echo $j; ?></td>
@@ -98,7 +98,13 @@ if(isset($_POST['nb'])){
 <table cellpadding="0" cellspacing="0" border="1px" class="table">
 <thead>
 <tr>
-<th>Data</th>
+<th>No.</th>
+<th>Data Nomor</th>
+<th>Total Pengungsi</th>
+<th>Kebutuhan Mendesak</th>
+<th>Relawan Medis</th>
+<th>Relawan Psikolog / Rohani</th>
+<th>Relawan Teknis</th>
 <th>Probabilitas Tertinggi</th>
 <th>Kelas</th>
 <tr>
@@ -106,12 +112,20 @@ if(isset($_POST['nb'])){
 <tbody>
 
 <?php
+$j=0;
 $query = mysqli_query($con,"SELECT * FROM naivebayes_sisa");
-while ($record = mysqli_fetch_assoc($query)) {
-	$prob = NB($con,$record);
+while ($hasil = mysqli_fetch_assoc($query)) {
+	$prob = NB($con,$hasil);
+	$j++;
 ?>
 <tr>
-<td><?php echo $record['Data']; ?></td>
+<td><?php echo $j; ?></td>
+<td><?php echo $hasil['Data']; ?></td>
+<td><?php echo $hasil['Total_Pengungsi'];?></td>
+<td><?php echo $hasil['Kebutuhan_Mendesak'];?></td>
+<td><?php echo $hasil['Medis'];?></td>
+<td><?php echo $hasil['Psikolog_Rohani'];?></td>
+<td><?php echo $hasil['Teknis'];?></td>
 <td><?php echo $prob['max'];?></td>
 <td><?php echo $prob['class'];?></td>
 </tr>
@@ -130,7 +144,8 @@ while ($record = mysqli_fetch_assoc($query)) {
 <table cellpadding="0" cellspacing="0" border="1px" class="table">
 <thead>
 <tr>
-<th>No</th>
+<th>No.</th>
+<th>Data No</th>
 <th>Update Terakhir</th>
 <th>Nama Posko</th>
 <th>Dusun</th>
@@ -149,10 +164,13 @@ while ($record = mysqli_fetch_assoc($query)) {
 <tbody>
 
 <?php
+$j=0;
 $query = mysqli_query($con,"SELECT * FROM mentah");
 while ($record = mysqli_fetch_assoc($query)) {
+	$j++;
 ?>
 <tr>
+<td><?php echo $j; ?></td>
 <td> <?php echo $record['No']; ?></td>
 <td> <?php echo $record['Update_Terakhir']; ?></td>
 <td> <?php echo $record['Nama_Posko']; ?></td>

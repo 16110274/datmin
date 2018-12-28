@@ -100,9 +100,54 @@ if ($CentroidB != $Centroid){
 	$iter = 0;
 }
 }
-echo 'ITERASI KE - '.$enditer.'<br>';
+echo 'Clustering selesai pada iterasi ke - '.$enditer.'<br>';
 //End Iteration
-
+?>
+<H2>Klasifikasi K-Means</H2>
+<table cellpadding="0" cellspacing="0" border="1px" class="table">
+<thead>
+<tr bgcolor="black" style="color: white;">
+<th>No.</th>
+<th>Data Nomor</th>
+<th>Total Pengungsi</th>
+<th>Kebutuhan Mendesak</th>
+<th>Relawan Medis</th>
+<th>Relawan Psikolog / Rohani</th>
+<th>Relawan Teknis</th>
+<th>Kelas</th>
+<tr>
+</thead>
+<tbody>
+<?php
+$j=0;
+for ($i=1;$i<=5;$i++){
+	$query = mysqli_query($con,"SELECT * FROM kmeans_c".$i."");
+	while ($hasil = mysqli_fetch_assoc($query)) {
+		$j++;
+?>
+	<tr>
+	<td><?php echo $j; ?></td>
+	<td><?php echo $hasil['Data']; ?></td>
+	<td><?php echo $hasil['Total_Pengungsi'];?></td>
+	<td><?php echo $hasil['Kebutuhan_Mendesak'];?></td>
+	<td><?php echo $hasil['Medis'];?></td>
+	<td><?php echo $hasil['Psikolog_Rohani'];?></td>
+	<td><?php echo $hasil['Teknis'];?></td>
+	<td><?php echo "C".$i."";?></td>
+	</tr>
+	
+<?php
+	}
+?>
+	<tr bgcolor="#000000">
+	<td colspan="8" >Black</td>
+	</tr>
+<?php
+}
+?>
+	</tbody>
+	</table>
+<?php
 $time_end = microtime(true); //End Timer
 //Calculate and Print Timer
 $execution_time = ($time_end - $time_start);
