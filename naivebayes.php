@@ -1,17 +1,19 @@
 <?php
 //BELUM SELESAI TOLONG DILIHAT LAGI
 // DATA TRAINING PREPARATION
-function prep($con){
+function prep($con,$table){
 	//Delete data from all class table
 	mysqli_query($con ,"TRUNCATE `naivebayes_c1`");
 	mysqli_query($con ,"TRUNCATE `naivebayes_c2`");
 	mysqli_query($con ,"TRUNCATE `naivebayes_c3`");
 	mysqli_query($con ,"TRUNCATE `naivebayes_c4`");
 	mysqli_query($con ,"TRUNCATE `naivebayes_c5`");
-	mysqli_query($con ,"TRUNCATE `naivebayes_sisa`");
+	if($table == 'mentah'){
+		mysqli_query($con ,"TRUNCATE `naivebayes_sisa`");
+	}
 	
 	//Fetch data from source table
-	$query = mysqli_query($con,"SELECT * FROM mentah");
+	$query = mysqli_query($con,"SELECT * FROM ".$table);
 	while ($record = mysqli_fetch_array($query)) {
 		//Pengelompokkan data total pengungsi	
 		if($record['Total_Pengungsi']<100){
@@ -228,7 +230,7 @@ while ($hasil = mysqli_fetch_assoc($query)) {
 <td><?php echo $hasil['Psikolog_Rohani'];?></td>
 <td><?php echo $hasil['Teknis'];?></td>
 <td><?php echo number_format((float)$prob['max'], 10, '.', '');?></td>
-<td><?php echo $prob['class'];?></td>
+<td><?php echo 'C'.$prob['class'];?></td>
 </tr>
 <?php 
 	if(isset($_POST['ins'])){

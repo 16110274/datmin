@@ -1,6 +1,6 @@
 <?php
 //KMEANS CALCULATION
-function kmeans($con){
+function kmeans($con,$table){
 //Centroid Awal
 	$Centroid = [
 		'C1' => [
@@ -61,7 +61,7 @@ while ($iter > 0){
 	$jarak = [];
 	
 	//Fetch data from source table
-	$query = mysqli_query($con,"SELECT * FROM mentah");
+	$query = mysqli_query($con,"SELECT * FROM ".$table);
 	while ($record = mysqli_fetch_assoc($query)) {
 		for ($i=1;$i<=5;$i++){
 			$jarak[$i] = SQRT(($record['Total_Pengungsi']-$Centroid['C'.$i]['TP'])**2+

@@ -11,7 +11,7 @@
 	
 ?>
 <!--HTML START-->
-<H2>[Perbandingan / Integrasi] Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010</H2>
+<H2>Perbandingan dan Integrasi Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010</H2>
 
 <!--DATA TRAINING PREPARATION-->
 <form method="post" action=''>
@@ -35,6 +35,7 @@
 			<td>
 				<!--K-Means Clustering-->
 				<button name="km" type="submit">K-Means</button>
+				<input name="nbtkm" type="checkbox">Process Naive Bayes Data Training with K-Means</input>
 			</td>
 		</tr>
 	</tbody>
@@ -48,7 +49,7 @@
 		if(isset($_POST['prep'])){
 			//if prepare data training is checked
 			//function preparation is called
-			prep($con);
+			prep($con,'mentah');
 		}
 		//function show data is called
 		showdata($con,'naivebayes','Naive Bayes Data Training');
@@ -66,8 +67,13 @@
 		showNB($con);
 	}else if(isset($_POST['km'])){
 		//if button kmeans is pressed
+		if(isset($_POST['ins'])){
+			//if process with kmeans is checked
+			kmeans($con,'kmeans_training_naivebayes');
+			prep($con,'union_kmeans');
+		}
 		//function kmeans is called
-		kmeans($con);
+		kmeans($con,'mentah');
 		showdata($con,'kmeans','K-Means Clustering');
 	}else {
 		//default view
