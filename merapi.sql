@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2018 at 03:18 PM
+-- Generation Time: Dec 29, 2018 at 12:03 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `kmeans_c1` (
-  `Data` int(10) NOT NULL,
+  `Data` int(3) NOT NULL,
   `Total_Pengungsi` int(10) NOT NULL,
   `Kebutuhan_Mendesak` int(10) NOT NULL,
   `Medis` int(1) NOT NULL,
@@ -59,7 +59,7 @@ INSERT INTO `kmeans_c1` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis
 --
 
 CREATE TABLE `kmeans_c2` (
-  `Data` int(10) NOT NULL,
+  `Data` int(3) NOT NULL,
   `Total_Pengungsi` int(10) NOT NULL,
   `Kebutuhan_Mendesak` int(10) NOT NULL,
   `Medis` int(1) NOT NULL,
@@ -194,7 +194,7 @@ INSERT INTO `kmeans_c2` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis
 --
 
 CREATE TABLE `kmeans_c3` (
-  `Data` int(10) NOT NULL,
+  `Data` int(3) NOT NULL,
   `Total_Pengungsi` int(10) NOT NULL,
   `Kebutuhan_Mendesak` int(10) NOT NULL,
   `Medis` int(1) NOT NULL,
@@ -279,7 +279,7 @@ INSERT INTO `kmeans_c3` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis
 --
 
 CREATE TABLE `kmeans_c4` (
-  `Data` int(10) NOT NULL,
+  `Data` int(3) NOT NULL,
   `Total_Pengungsi` int(10) NOT NULL,
   `Kebutuhan_Mendesak` int(10) NOT NULL,
   `Medis` int(1) NOT NULL,
@@ -451,7 +451,7 @@ INSERT INTO `kmeans_c4` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis
 --
 
 CREATE TABLE `kmeans_c5` (
-  `Data` int(10) NOT NULL,
+  `Data` int(3) NOT NULL,
   `Total_Pengungsi` int(10) NOT NULL,
   `Kebutuhan_Mendesak` int(10) NOT NULL,
   `Medis` int(1) NOT NULL,
@@ -501,20 +501,6 @@ INSERT INTO `kmeans_c5` (`Data`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis
 -- (See below for the actual view)
 --
 CREATE TABLE `kmeans_training_naivebayes` (
-`No` int(3)
-,`Update_Terakhir` varchar(16)
-,`Nama_Posko` varchar(160)
-,`Dusun` varchar(25)
-,`Desa` varchar(17)
-,`Kecamatan` varchar(14)
-,`Kabupaten` varchar(8)
-,`Asal_Pengungsi` varchar(1022)
-,`Total_Pengungsi` int(4)
-,`Kebutuhan_Mendesak` int(3)
-,`Medis` int(1)
-,`Psikolog_Rohani` int(1)
-,`Teknis` int(1)
-,`Prioritas` varchar(144)
 );
 
 -- --------------------------------------------------------
@@ -524,7 +510,7 @@ CREATE TABLE `kmeans_training_naivebayes` (
 --
 
 CREATE TABLE `mentah` (
-  `No` int(3) DEFAULT NULL,
+  `Data` int(3) DEFAULT NULL,
   `Update_Terakhir` varchar(16) DEFAULT NULL,
   `Nama_Posko` varchar(160) DEFAULT NULL,
   `Dusun` varchar(25) DEFAULT NULL,
@@ -544,7 +530,7 @@ CREATE TABLE `mentah` (
 -- Dumping data for table `mentah`
 --
 
-INSERT INTO `mentah` (`No`, `Update_Terakhir`, `Nama_Posko`, `Dusun`, `Desa`, `Kecamatan`, `Kabupaten`, `Asal_Pengungsi`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`, `Prioritas`) VALUES
+INSERT INTO `mentah` (`Data`, `Update_Terakhir`, `Nama_Posko`, `Dusun`, `Desa`, `Kecamatan`, `Kabupaten`, `Asal_Pengungsi`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`, `Prioritas`) VALUES
 (2, '08-Nov-10', 'Balai Desa Taman Agung', 'Taman Agung', 'Taman Agung', 'Muntilan', 'Magelang', 'Dsn. Mranggen; Dsa. Taman Agung; Kec. Muntilan; Kab. Magelang', 545, 66, 1, 3, 1, '2'),
 (4, '08-Nov-10', 'SMP Marganingsih', 'N/A', 'Muntilan', 'Muntilan', 'Magelang', 'Dsn. Ngadipuro, Dsn. Klatak, Dsn. Gumuk, Dsn. Banyudono, Dsn. Demo, Dsn. Dukun, Dsn. Ngargomulyo, Dsn. Tanen, Dsn. Sumber, Dsn. Gumuh', 900, 177, 1, 1, 1, '1'),
 (9, '08-Nov-10', 'PDAM', 'N/A', 'N/A', 'N/A', 'N/A', 'Dsn. Kaweron, Dsn. Karangmulyo, Dsn. Dermo', 648, 53, 1, 3, 3, '3'),
@@ -765,7 +751,7 @@ INSERT INTO `mentah` (`No`, `Update_Terakhir`, `Nama_Posko`, `Dusun`, `Desa`, `K
 (290, '13-Nov-10', 'Wironayan-Larangan', 'Wironayan-Larangan', 'Jumoyo', 'Salam', 'Magelang', 'N/A', 570, 28, 3, 3, 3, '3'),
 (291, '13-Nov-10', 'Tetep Semangat', 'Kimeren', 'Jumoyo', 'Salam', 'Magelang', 'N/A', 100, 98, 3, 3, 3, '4'),
 (292, '13-Nov-10', 'Jumoyo Kidul', 'Jumoyo Kidul', 'Jumoyo', 'Salam', 'Magelang', 'N/A', 490, 96, 3, 3, 3, '4');
-INSERT INTO `mentah` (`No`, `Update_Terakhir`, `Nama_Posko`, `Dusun`, `Desa`, `Kecamatan`, `Kabupaten`, `Asal_Pengungsi`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`, `Prioritas`) VALUES
+INSERT INTO `mentah` (`Data`, `Update_Terakhir`, `Nama_Posko`, `Dusun`, `Desa`, `Kecamatan`, `Kabupaten`, `Asal_Pengungsi`, `Total_Pengungsi`, `Kebutuhan_Mendesak`, `Medis`, `Psikolog_Rohani`, `Teknis`, `Prioritas`) VALUES
 (293, '13-Nov-10', 'Pendem', 'Pendem', 'Jumoyo', 'Salam', 'Magelang', 'N/A', 207, 21, 3, 3, 3, '4'),
 (294, '13-Nov-10', 'Kadirogo', 'Kadirogo', 'Jumoyo', 'Salam', 'Magelang', 'N/A', 20, 8, 3, 3, 3, '4'),
 (295, '13-Nov-10', 'Desa Keji', 'N/A', 'Keji', 'Muntilan', 'Magelang', 'N/A', 6040, 7, 3, 3, 3, '5'),

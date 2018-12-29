@@ -79,7 +79,7 @@ function showprepro($con){
 ?>
 		<tr>
 			<td><?php echo $j; ?></td>
-			<td> <?php echo $record['No']; ?></td>
+			<td> <?php echo $record['Data']; ?></td>
 			<td> <?php echo $record['Update_Terakhir']; ?></td>
 			<td> <?php echo $record['Nama_Posko']; ?></td>
 			<td> <?php echo $record['Dusun']; ?></td>

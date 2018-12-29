@@ -8,10 +8,11 @@
 	require_once ("kmeans.php");
 	require_once ("naivebayes.php");
 	require_once ("showdata.php");
+    require_once ("viewcreate.php");
 	
 ?>
 <!--HTML START-->
-<H2>Perbandingan dan Integrasi Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010</H2>
+<H2>Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010</H2>
 
 <!--DATA TRAINING PREPARATION-->
 <form method="post" action=''>
@@ -69,11 +70,15 @@
 		//if button kmeans is pressed
 		if(isset($_POST['nbtkm'])){
 			//if process with kmeans is checked
+            //union($con, "naivebayes");
+            //km_t_nb($con);
 			kmeans($con,'kmeans_training_naivebayes');
+            //union($con, "kmeans");
 			prep($con,'union_kmeans');
-		}
+		}else{
 		//function kmeans is called
 		kmeans($con,'mentah');
+        }
 		showdata($con,'kmeans','K-Means Clustering');
 	}else {
 		//default view
