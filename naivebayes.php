@@ -1,5 +1,4 @@
 <?php
-//BELUM SELESAI TOLONG DILIHAT LAGI
 // DATA TRAINING PREPARATION
 function prep($con,$table){
 	//Delete data from all class table
