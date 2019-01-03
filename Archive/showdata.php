@@ -1,80 +1,10 @@
 <?php
 function showdata($con,$algo,$title){
-?>	
-
-
-
-
-	<script>
-		var ctx = document.getElementById("myChart").getContext('2d');
-		var myChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ["C1", "C2", "C3", "C4", "C5"],
-				datasets: [{
-					label: 'K-Means Clustering',
-					data: [
-					<?php 
-					$jumlah_teknik = mysqli_query($con,"SELECT * FROM `kmeans_c1` ");
-					echo mysqli_num_rows($jumlah_teknik);
-					?>, 
-					<?php 
-					$jumlah_ekonomi = mysqli_query($con,"SELECT * FROM `kmeans_c2` ");
-					echo mysqli_num_rows($jumlah_ekonomi);
-					?>, 
-					<?php 
-					$jumlah_fisip = mysqli_query($con,"SELECT * FROM `kmeans_c3` ");
-					echo mysqli_num_rows($jumlah_fisip);
-					?>, 
-					<?php 
-					$jumlah_pertanian = mysqli_query($con,"SELECT * FROM `kmeans_c4`");
-					echo mysqli_num_rows($jumlah_pertanian);
-					?>, 
-					<?php 
-					$jumlah_c5 = mysqli_query($con,"SELECT * FROM `kmeans_c5`");
-					echo mysqli_num_rows($jumlah_c5);
-					?>
-					],
-					backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(75, 192, 192, 0.2)'
-					],
-					borderColor: [
-					'rgba(255,99,132,1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(75, 192, 192, 1)'
-					],
-					borderWidth: 1
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero:true
-						}
-					}]
-				}
-			}
-		});
-	</script>
-
-
-
-<br>
-	<H4><?php echo$title?></H4>
-	<br>
-            
-
-
-	<table class="table text-center">
-		<thead class="bg-primary">
-		<tr class="text-white">
+?>
+	<H2><?php echo$title?></H2>
+	<table cellpadding="0" cellspacing="0" border="1px" class="table">
+		<thead>
+		<tr bgcolor="black" style="color: white;">
 			<th>No.</th>
 			<th>Data Nomor</th>
 			<th>Total Pengungsi</th>
@@ -106,35 +36,23 @@ function showdata($con,$algo,$title){
 <?php
 			}
 ?>
-		<tr bgcolor="#C0C0C0">
-			<td colspan="8" ></td>
+		<tr bgcolor="#000000">
+			<td colspan="8" >Black</td>
 		</tr>
-
-
 <?php
 		}
 ?>
 		</tbody>
 	</table>
-	<br>
 <?php
 }
 
 function showprepro($con){
 ?>
-
- 	
-
-
-
-        <table class="table table-striped text-center">
-       <h4 class="header-title">Data Hasil Preprocessing</h4>
- 
-
-
-		<thead class="bg-primary">
-
-		<tr class="text-white">
+	<H2>DATA HASIL PREPROCESSING</H2>
+	<table cellpadding="0" cellspacing="0" border="1px" class="table">
+		<thead>
+		<tr bgcolor="black" style="color: white;">
 			<th>No.</th>
 			<th>Data No</th>
 			<th>Update Terakhir</th>
@@ -150,7 +68,7 @@ function showprepro($con){
 			<th>Relawan Psikolog dan Rohani</th>
 			<th>Relawan Teknis</th>
 			<th>Prioritas</th>
-		</tr>
+		<tr>
 		</thead>
 		<tbody>
 <?php
