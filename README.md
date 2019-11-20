@@ -1,6 +1,5 @@
-# datmin
-Final Project Data Mining
-Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010
+# Final Project Data Mining
+# Aplikasi Data Mining Metode Klasifikasi dan Clustering dalam Penentuan Prioritas Bantuan Posko Bencana Gunung Merapi Tahun 2010
 
 Algoritma yang digunakan : Naive Bayes dan K-Means
 
