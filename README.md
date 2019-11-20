@@ -13,4 +13,4 @@ Dataset : Merapi.sql
 <img src="https://github.com/16110274/datmin/blob/master/screenshot/4.png" width="256">&nbsp;
 <img src="https://github.com/16110274/datmin/blob/master/screenshot/5.png" width="256">&nbsp;
 <img src="https://github.com/16110274/datmin/blob/master/screenshot/6.png" width="256">&nbsp;
-<img src="https://github.com/16110274/datmin/blob/master/screenshot/7.png" width="256">&nbsp
+<img src="https://github.com/16110274/datmin/blob/master/screenshot/7.png" width="256">
